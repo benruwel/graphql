@@ -1,0 +1,14 @@
+<ng-container *ngIf="launchDetails$ | async as details">
+
+  <main class="bg-gray-200 min-h-screen">
+    <div class="flex flex-col items-center  space-y-4 max-w-lg h-full mx-auto">
+      <div class="w-56 h-56">
+      <img class="object-center object-cover" [src]="details.links.mission_patch" alt="">
+      </div>
+      <p class="font-medium">{{ details.mission_name }}</p>
+      <p>{{ details.launch_date_local| date }}</p>
+      <p class="text-center">{{ details.details }}</p>
+    </div>
+  </main>
+
+</ng-container>

@@ -1,0 +1,13 @@
+query getAllLifts {
+  allLifts {
+    name
+    status
+    capacity
+    elevationGain
+    trailAccess {
+      id
+      name
+      difficulty
+    }
+  }
+}

@@ -120,5 +120,8 @@
       }
     }
   },
-  "defaultProject": "learning-graphql"
+  "defaultProject": "learning-graphql",
+  "cli": {
+    "analytics": false
+  }
 }

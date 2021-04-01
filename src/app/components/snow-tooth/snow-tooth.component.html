@@ -1,0 +1,9 @@
+<p class="text-xl text-black">Snow tooth works!</p>
+
+<ng-container *ngIf="allLifts$ | async as allLifts">
+  <ul>
+    <li *ngFor="let lift of allLifts">
+      {{ lift.name }}
+    </li>
+  </ul>
+</ng-container>

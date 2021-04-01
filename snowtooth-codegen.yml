@@ -1,0 +1,14 @@
+# Where to get schema data
+schema:
+  - http://snowtooth.moonhighway.com/
+# The client side queries to turn into services
+documents:
+  - src/app/components/snow-tooth/*.graphql
+# Where to output the services and the list of plugins
+generates:
+  ./src/app/services/snow-tooth-gql.service.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-apollo-angular:
+          namedClient: 'snowTooth'
