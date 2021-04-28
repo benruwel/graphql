@@ -1,0 +1,62 @@
+<div class="p-44 bg-gray-200 text-blue-900 min-h-screen">
+  <div [formGroup]="searchGroup" class="grid grid-cols-2 gap-4">
+    <div class="flex flex-col space-y-4">
+      <div class="h-12 w-full">
+        <input
+          class="h-full w-96 px-4 rounded-md shadow focus:outline-none focus:shadow-xl"
+          type="text"
+          placeholder="Search for color"
+          formControlName="color"
+          #colorInput
+        />
+      </div>
+
+      <button (click)="callColorsApi(colorInput.value)" class="w-44 bg-blue-500 text-white focus:outline-none px-6 py-2 rounded-md">Search</button>
+
+      <div
+        *ngIf="searchRes$"
+        class="flex flex-col space-y-2 px-6 py-2 max-h-96 w-96 divide-y-2 divide-gray-100 divide-solid bg-white rounded-md shadow overflow-y-auto"
+      >
+        <ng-container *ngIf="!showErrorMessage">
+          <div
+            *ngFor="let color of searchRes$ | async; let i = index"
+            class="flex flex-row items-center pt-2 hover:cursor-pointer"
+            (click)="addColor(color)"
+          >
+            <p class="flex-1"> {{ i }} {{ color.name }}</p>
+            <div
+              [ngStyle]="{ 'background-color': color.hex }"
+              class="h-4 w-24"
+            ></div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="showErrorMessage">
+          <p class="text-red-800 text-center font-semibold">Doesn't exist</p>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="flex flex-col space-y-4">
+      <ng-container *ngIf="addedColors > 0">
+        <p>
+          Added <span class="font-medium">{{ addedColors }}</span> colors
+        </p>
+          <div
+            @items
+            *ngFor="let selectedColor of selectedColors$ | async; let i = index"
+            class="flex flex-row items-center space-x-2"
+          >
+            <div class="flex flex-row flex-1 bg-white items-center p-4 rounded-md shadow">
+              <p class="flex-1">{{ selectedColor.name }}</p>
+              <div
+                [ngStyle]="{ 'background-color': selectedColor.hex }"
+                class="h-4 w-24"
+              ></div>
+            </div>
+            <p (click)="removeColor(i)" class="text-lg text-gray-600 cursor-pointer font-semibold hover:text-red-400">&#10005;</p>
+          </div>
+      </ng-container>
+    </div>
+  </div>
+  <div></div>
+</div>
